@@ -66,10 +66,11 @@ ZkpUtils.verifyProof = function(evilName, address, s1String, s2String, publicKey
   return false
 }
 
+module.exports = ZkpUtils
 
-let res = ZkpUtils.generateProof('asd', '0x234', keypair.privateKey)
-console.log(res)
+//let res = ZkpUtils.generateProof('asd', '0x234', keypair.privateKey)
+//console.log(res)
 
-let status = ZkpUtils.verifyProof('fds', '0x234', res.s1, res.s2, keypair.publicKey)
-console.log(status)
+//let status = ZkpUtils.verifyProof('fds', '0x234', res.s1, res.s2, keypair.publicKey)
+//console.log(status)
 
