@@ -6,11 +6,14 @@ contract HashtagHackers {
     }
     
     mapping(bytes32 => Registration[]) registered;
+    mapping(address => bytes32[]) registrations;
     mapping(address => string) revealed;
     
     function Register(bytes32 hash, bytes32 pubkey) public {
-        uint256 index = registered[hash].length;
-        registered[hash][index] = Registration(msg.sender, pubkey);
+        uint256 registeredIndex = registered[hash].length;
+        registered[hash][registeredIndex] = Registration(msg.sender, pubkey);
+        uint256 registrationIndex = registrations[msg.sender].length;
+        registrations[msg.sender][registrationIndex] = hash;
     }
     
     function Reveal(string ipfs) public {
@@ -23,6 +26,10 @@ contract HashtagHackers {
     
     function getReveal(address revealer) public constant returns (string) {
         return revealed[revealer];
+    }
+    
+    function getMyRegistrations() public constant returns (bytes32[]) {
+        return registrations[msg.sender];
     }
 }
 
