@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Decentralized anonymous coordination</title>
+    <script type="text/javascript" src="bundle.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div>
+        <section>
+            <h2>Connect uPort</h2>
+            <table>
+              <tbody>
+                <tr><td><span>uPort Id: </span><span id="uportId"></span></td></tr>
+                <tr><td><span>ETH address:</span> <span id="ethAddress"></span> </td></tr>
+                <tr><td><span>Email: </span><span id="emailAddress"></span></td></tr>
+              </tbody>
+            </table>
+            <button class="btn btn-sm btn-primary" id="connectUportBtn" onclick="uportConnect()">Connect uPort</button>
+          </section>
+    </div>
+    <script>
+        // State and render functions
+  
+        const $ = (selector) => document.querySelector(selector)
+        let globalState = {
+          uportId: "",
+          ethAddress: "",
+          ethBalance: "",
+          currentStatus: "",
+          statusInput: "",
+          txHashSentEth: "",
+          txHashSetStatus: "",
+          sendToAddr: "",
+          sendToVal: ""
+        }
+  
+        const render = function () {
+          $('#uportId').innerHTML = globalState.uportId;
+          $('#ethAddress').innerHTML = globalState.ethAddress;
+          $('#emailAddress').innerHTML = globalState.uportEmail;
+          $('#currentStatus').innerHTML = globalState.currentStatus;
+        }
+  
+        const updateState = function () {
+          globalState.statusInput = $('#statusInput').value;
+          console.log(globalState)
+        }
+  
+        ////////////////////////////////////////////////
+  
+  
+        ////////////////////////////////////////////////
+  
+      </script>
+  </body>
+</html>
