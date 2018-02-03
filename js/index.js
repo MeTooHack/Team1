@@ -6,7 +6,7 @@ const bn = require('bignumber.js')
 const enc = require('./enc')
 const Promise = require('bluebird')
 
-const abi = [{"constant":true,"inputs":[],"name":"getMyRegistrations","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"revealer","type":"address"}],"name":"getReveal","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ipfs","type":"string"}],"name":"reveal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"hash","type":"bytes32"},{"name":"pubkey","type":"string"},{"name":"sig1","type":"string"},{"name":"sig2","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSender","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig1","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getRegisteredLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig2","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredPubkey","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}];
+const abi = [{"constant":true,"inputs":[{"name":"revealer","type":"address"}],"name":"getReveal","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ipfs","type":"string"}],"name":"reveal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"hash","type":"bytes32"},{"name":"pubkey","type":"string"},{"name":"sig1","type":"string"},{"name":"sig2","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSender","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig1","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getRegisteredLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig2","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getMyRegistrations","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredPubkey","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}];
 
 let contract
 let address
@@ -17,7 +17,7 @@ window.addEventListener('load', function() {
 })
 
 function initContract(){
-  contract = uweb3.eth.contract(abi).at('0x4290CbCE2bdFa58138FB72E54A09a2AB1FCd5437')
+  contract = uweb3.eth.contract(abi).at('0xc984e8D66398aD5b06A9CA1Ed52691b1cA06c243')
   contract = Promise.promisifyAll(contract)
 }
 
@@ -50,7 +50,7 @@ async function reveal(hash) {
 
 function showRegistrations() {
   console.log("0")
-  contract.getMyRegistrations.call((error, registrations) => {
+  contract.getMyRegistrations(globalState.ethAddress, (error, registrations) => {
     console.log("1", registrations)
     registrations = [...new Set(registrations)]
     registrations.forEach(r => {

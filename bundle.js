@@ -30199,14 +30199,10 @@ module.exports = Encryption
 //console.log(cleartxt)
 
 },{"tweetnacl":388,"tweetnacl-util":387}],174:[function(require,module,exports){
-//import { Connect, MNID, SimpleSigner } from 'uport-connect'
-//export { Connect, ConnectCore, QRUtil, SimpleSigner, Credentials, MNID }
 const uport = require('uport-connect')
-
-/* global Web3 globalState render */
+const Enc = require('./enc.js')
 
 // Setup
-
 const SimpleSigner = uport.SimpleSigner
 const Connect = uport.Connect
 
@@ -30220,15 +30216,19 @@ const connect = new Connect("Coordination", {
   
 const web3 = connect.getWeb3()
 
+
 const credentials = connect.credentials
 
 let Identify = {}
 
 Identify.attest = function() {
+  var encryptionKeys = Enc.generateKeyPair();
+  globalState.perEncryptionKeyPriv = encryptionKeys.secretKey;
+  globalState.perEncryptionKeyPub = encryptionKeys.publicKey;
   credentials.attest({
     sub: globalState.uportId,
     exp: Date.now() + 100000000000,
-    claim: {CoordLogin: {PrivKey: 'Ox123', PubKey: '0x4321'}}
+    claim: {CoordLogin: {PrivKey: encryptionKeys.secretKey, PubKey: encryptionKeys.publicKey}}
   }).then(attestation => {
     console.log(attestation)
     //me.uport:add?attestations=
@@ -30243,6 +30243,7 @@ Identify.attest = function() {
 // Setup the simple Status contract - allows you to set and read a status string
 // uPort connect
 Identify.connect = function() {
+  
   connect.requestCredentials({
     requested: ['name', 'email', 'CoordLogin'],
     notifications: true // We want this if we want to recieve credentials
@@ -30255,10 +30256,17 @@ Identify.connect = function() {
     globalState.uportId = credentials.address;
     globalState.ethAddress = uport.MNID.decode(credentials.address).address;
     globalState.uportEmail = credentials.email;
+    if(!credentials.CoordLogin){
+      Identify.attest();
+    }else{
+      globalState.perEncryptionKeyPriv = credentials.CoordLogin.PrivKey;
+      globalState.perEncryptionKeyPub = credentials.CoordLogin.PubKey;
+    }
     render();
     }, (err) => {
         console.log("Error:", err);
     })
+    return web3
 }
 
 
@@ -30280,7 +30288,7 @@ const sendEther = () => {
 }
 
 module.exports = Identify
-},{"uport-connect":391}],175:[function(require,module,exports){
+},{"./enc.js":173,"uport-connect":391}],175:[function(require,module,exports){
 const nacl = require('tweetnacl')
 const Identify = require('./identify.js')
 nacl.util = require('tweetnacl-util')
@@ -30289,35 +30297,30 @@ const bn = require('bignumber.js')
 const enc = require('./enc')
 const Promise = require('bluebird')
 
-const abi = [{"constant":true,"inputs":[],"name":"getMyRegistrations","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"revealer","type":"address"}],"name":"getReveal","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ipfs","type":"string"}],"name":"reveal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"hash","type":"bytes32"},{"name":"pubkey","type":"string"},{"name":"sig1","type":"string"},{"name":"sig2","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSender","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig1","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getRegisteredLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig2","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredPubkey","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}];
+const abi = [{"constant":true,"inputs":[{"name":"revealer","type":"address"}],"name":"getReveal","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ipfs","type":"string"}],"name":"reveal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"hash","type":"bytes32"},{"name":"pubkey","type":"string"},{"name":"sig1","type":"string"},{"name":"sig2","type":"string"}],"name":"register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSender","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig1","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getRegisteredLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredSig2","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"user","type":"address"}],"name":"getMyRegistrations","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"i","type":"uint256"}],"name":"getRegisteredPubkey","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}];
 
 let contract
-let keys = {
-  publicKey: "mDdaQrp0W2NuAunDGWH89PeBQy8i/5iTeklp8bU4MlQ=",
-  secretKey: "aciCI2usRhyL3mlUyKGyXeDQy4qMSqybfYqebcGAuB8="
-}
 let address
+let uweb3
+
 
 window.addEventListener('load', function() {
-  initContract()
-  showRegistrations()
 })
 
 function initContract(){
-  contract = web3.eth.contract(abi).at('0x4290CbCE2bdFa58138FB72E54A09a2AB1FCd5437')
+  contract = uweb3.eth.contract(abi).at('0xc984e8D66398aD5b06A9CA1Ed52691b1cA06c243')
   contract = Promise.promisifyAll(contract)
 }
 
 window.connect = function() {
-  web3.eth.getCoinbase((error, result) => {
-    address = result
-    document.getElementById('address').innerHTML = address
-  })
+  uweb3 = Identify.connect()
+  initContract()
+  showRegistrations()
 }
 
 window.register = function(form) {
   let hash = sha3(form.name.value)
-  contract.register(hash, keys.publicKey, "", "", error => error && console.log(error))
+  contract.register(hash, globalState.perEncryptionKeyPub, "", "", error => error && console.log(error))
 
   return false
 }
@@ -30328,7 +30331,7 @@ async function reveal(hash) {
   let length = new bn(result).toNumber()
   for (let i = 0; i < length; i++) {
     let toPubKey = await contract.getRegisteredPubkeyAsync(hash, i)
-    let encrypted = enc.encrypt(toPubKey, keys.publicKey, keys.secretKey, "email@example.com")
+    let encrypted = enc.encrypt(toPubKey, globalState.perEncryptionKeyPub, globalState.perEncryptionKeyPriv, globalState.uportEmail)
     encryptedList.push(encrypted)
   }
 
@@ -30337,7 +30340,9 @@ async function reveal(hash) {
 }
 
 function showRegistrations() {
-  contract.getMyRegistrations.call((error, registrations) => {
+  console.log("0")
+  contract.getMyRegistrations(globalState.ethAddress, (error, registrations) => {
+    console.log("1", registrations)
     registrations = [...new Set(registrations)]
     registrations.forEach(r => {
       contract.getRegisteredLength(r, (error, result) => {
