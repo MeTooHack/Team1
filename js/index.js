@@ -1,6 +1,6 @@
 const Web3 = require('web3')
 const nacl = require('tweetnacl')
-const identify = require('./identify.js')
+const Identify = require('./identify.js')
 nacl.util = require('tweetnacl-util')
 
 const abi = [{"constant":true,"inputs":[],"name":"getMyRegistrations","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"revealer","type":"address"}],"name":"getReveal","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"bytes32"}],"name":"getRegistered","outputs":[{"components":[{"name":"sender","type":"address"},{"name":"pubkey","type":"bytes32"}],"name":"","type":"tuple[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"hash","type":"bytes32"},{"name":"pubkey","type":"bytes32"}],"name":"Register","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"ipfs","type":"string"}],"name":"Reveal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
@@ -27,4 +27,6 @@ function showRegistrations() {
   })
 }
 
-window.uportConnect = identify;
+window.uportConnect = Identify.connect;
+
+window.uportAttest = Identify.attest;

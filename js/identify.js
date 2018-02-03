@@ -8,6 +8,7 @@ const uport = require('uport-connect')
 
 const SimpleSigner = uport.SimpleSigner
 const Connect = uport.Connect
+
 const appName = 'Decentralized Coordination'
 
 const connect = new Connect("Coordination", {
@@ -18,15 +19,36 @@ const connect = new Connect("Coordination", {
   
 const web3 = connect.getWeb3()
 
+const credentials = connect.credentials
+
+let Identify = {}
+
+Identify.attest = function() {
+  credentials.attest({
+    sub: globalState.uportId,
+    exp: Date.now() + 100000000000,
+    claim: {CoordLogin: {PrivKey: 'Ox123', PubKey: '0x4321'}}
+  }).then(attestation => {
+    console.log(attestation)
+    //me.uport:add?attestations=
+    let payload = {
+      url: 'me.uport:add?attestations=' + attestation
+    }
+    credentials.push(connect.pushToken, connect.publicEncKey, payload)
+    // send attestation to user
+  })
+}
+
 // Setup the simple Status contract - allows you to set and read a status string
 // uPort connect
-module.exports = function() {
+Identify.connect = function() {
   connect.requestCredentials({
-    requested: ['name', 'email'],
+    requested: ['name', 'email', 'CoordLogin'],
     notifications: true // We want this if we want to recieve credentials
   })
   .then((credentials) => {
   // Do something
+    console.log(credentials)
     console.log("Credenials:", credentials);
     globalState.uportName = credentials.name;
     globalState.uportId = credentials.address;
@@ -55,3 +77,5 @@ const sendEther = () => {
     }
   )
 }
+
+module.exports = Identify
