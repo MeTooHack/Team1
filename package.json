@@ -1,0 +1,22 @@
+{
+  "name": "team1",
+  "version": "1.0.0",
+  "description": "A proof of concept blockchain solution for connect victims from the same perpetrator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeTooHack/Team1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MeTooHack/Team1/issues"
+  },
+  "homepage": "https://github.com/MeTooHack/Team1#readme",
+  "dependencies": {
+    "ethereumjs-util": "^5.1.3"
+  }
+}
