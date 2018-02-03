@@ -41,13 +41,13 @@ Identify.attest = function() {
 
 // Setup the simple Status contract - allows you to set and read a status string
 // uPort connect
-Identify.connect = function() {
+Identify.connect = async function() {
   
-  connect.requestCredentials({
+  let credentials = await connect.requestCredentials({
     requested: ['name', 'email', 'CoordLogin'],
     notifications: true // We want this if we want to recieve credentials
   })
-  .then((credentials) => {
+  
   // Do something
     console.log(credentials)
     console.log("Credenials:", credentials);
@@ -62,9 +62,7 @@ Identify.connect = function() {
       globalState.perEncryptionKeyPub = credentials.CoordLogin.PubKey;
     }
     render();
-    }, (err) => {
-        console.log("Error:", err);
-    })
+
     return web3
 }
 

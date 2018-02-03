@@ -21,8 +21,8 @@ function initContract(){
   contract = Promise.promisifyAll(contract)
 }
 
-window.connect = function() {
-  uweb3 = Identify.connect()
+window.connect = async function() {
+  uweb3 = await Identify.connect()
   initContract()
   showRegistrations()
 }
@@ -49,7 +49,7 @@ async function reveal(hash) {
 }
 
 function showRegistrations() {
-  console.log("0")
+  console.log("0", globalState.ethAddress)
   contract.getMyRegistrations(globalState.ethAddress, (error, registrations) => {
     console.log("1", registrations)
     registrations = [...new Set(registrations)]
