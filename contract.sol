@@ -2,26 +2,42 @@ pragma solidity ^0.4.0;
 contract HashtagHackers {
     struct Registration {
         address sender;
-        bytes32 pubkey;
+        string pubkey;
+        string sig1;
+        string sig2;
     }
     
     mapping(bytes32 => Registration[]) registered;
     mapping(address => bytes32[]) registrations;
     mapping(address => string) revealed;
     
-    function Register(bytes32 hash, bytes32 pubkey) public {
-        uint256 registeredIndex = registered[hash].length;
-        registered[hash][registeredIndex] = Registration(msg.sender, pubkey);
-        uint256 registrationIndex = registrations[msg.sender].length;
-        registrations[msg.sender][registrationIndex] = hash;
+    function register(bytes32 hash, string pubkey, string sig1, string sig2) public {
+        registered[hash].push(Registration(msg.sender, pubkey, sig1, sig2));
+        registrations[msg.sender].push(hash);
     }
     
-    function Reveal(string ipfs) public {
+    function reveal(string ipfs) public {
         revealed[msg.sender] = ipfs;
     }
     
-    function getRegistered(bytes32 hash) public constant returns (Registration[]) {
-        return registered[hash];
+    function getRegisteredLength(bytes32 hash) public constant returns (uint) {
+        return registered[hash].length;
+    }
+    
+    function getRegisteredSender(bytes32 hash, uint i) public constant returns (address) {
+        return registered[hash][i].sender;
+    }
+    
+    function getRegisteredPubkey(bytes32 hash, uint i) public constant returns (string) {
+        return registered[hash][i].pubkey;
+    }
+    
+    function getRegisteredSig1(bytes32 hash, uint i) public constant returns (string) {
+        return registered[hash][i].sig1;
+    }
+    
+    function getRegisteredSig2(bytes32 hash, uint i) public constant returns (string) {
+        return registered[hash][i].sig2;
     }
     
     function getReveal(address revealer) public constant returns (string) {
