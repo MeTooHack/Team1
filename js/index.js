@@ -73,14 +73,13 @@ function showRegistrations() {
 }
 
 async function decrypt() {
-  console.log("0")
+  let a = ""
   let reveal = await contract.getRevealAsync(globalState.ethAddress)
-  console.log("1", reveal)
   let json = JSON.parse(reveal)
-  console.log("2", json)
-  let decrypted = enc.decrypt(json[0], globalState.perEncryptionKeyPriv)
-  console.log("3", decrypted)
-  document.getElementById("decrypted").innerHTML = decrypted
+  for (let i = 0; i < json.length; i++) {
+    a += enc.decrypt(json[i], globalState.perEncryptionKeyPriv)
+  }
+  document.getElementById("decrypted").innerHTML = a
 }
 
 window.uportConnect = Identify.connect;
