@@ -22,6 +22,7 @@
     "solidity-sha3": "^0.4.1",
     "tweetnacl": "^1.0.0",
     "tweetnacl-util": "^0.15.0",
-    "uport-connect": "^0.7.0"
+    "uport-connect": "^0.7.0",
+    "web3": "^1.0.0-beta.29"
   }
 }
