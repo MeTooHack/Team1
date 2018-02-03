@@ -30314,6 +30314,7 @@ window.connect = async function() {
   uweb3 = await Identify.connect()
   initContract()
   showRegistrations()
+  decrypt()
 }
 
 window.register = function(form) {
@@ -30360,10 +30361,14 @@ function showRegistrations() {
   })
 }
 
-window.decrypt = async function() {
+async function decrypt() {
+  console.log("0")
   let reveal = await contract.getRevealAsync(globalState.ethAddress)
+  console.log("1", reveal)
   let json = JSON.parse(reveal)
-  let decrypted = enc.decrypt(json, globalState.perEncryptionKeyPriv)
+  console.log("2", json)
+  let decrypted = enc.decrypt(json[0], globalState.perEncryptionKeyPriv)
+  console.log("3", decrypted)
   document.getElementById("decrypted").innerHTML = decrypted
 }
 
