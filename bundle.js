@@ -30304,7 +30304,7 @@ window.addEventListener('load', function() {
 })
 
 function initContract(){
-  contract = web3.eth.contract(abi).at('0xc89095ac1c852abbd0ee6b8ec43e0c292b95878f')
+  contract = web3.eth.contract(abi).at('0x4290CbCE2bdFa58138FB72E54A09a2AB1FCd5437')
   contract = Promise.promisifyAll(contract)
 }
 
