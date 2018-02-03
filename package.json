@@ -4,7 +4,8 @@
   "description": "A proof of concept blockchain solution for connect victims from the same perpetrator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify js/ -o bundle.js"
   },
   "repository": {
     "type": "git",

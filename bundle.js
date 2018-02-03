@@ -22332,14 +22332,13 @@ function register(el) {
 }
 
 function showRegistrations() {
-  console.log('foo')
   contract.methods.getMyRegistrations.call((error, result) => {
     document.getElementById('myRegistrations').innerHTML = result
   })
 }
 
 
-},{"tweetnacl":312,"tweetnacl-util":311,"web3":371}],157:[function(require,module,exports){
+},{"tweetnacl":312,"tweetnacl-util":311,"web3":368}],157:[function(require,module,exports){
 arguments[4][1][0].apply(exports,arguments)
 },{"./asn1/api":158,"./asn1/base":160,"./asn1/constants":164,"./asn1/decoders":166,"./asn1/encoders":169,"bn.js":171,"dup":1}],158:[function(require,module,exports){
 arguments[4][2][0].apply(exports,arguments)
@@ -35953,7 +35952,7 @@ module.exports = {
 };
 
 
-},{"underscore":313,"web3-eth-iban":354,"web3-utils":367}],319:[function(require,module,exports){
+},{"underscore":313,"web3-eth-iban":354,"web3-utils":364}],319:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -36578,7 +36577,7 @@ Method.prototype.request = function () {
 
 module.exports = Method;
 
-},{"underscore":313,"web3-core-helpers":319,"web3-core-promievent":322,"web3-core-subscriptions":327,"web3-utils":367}],321:[function(require,module,exports){
+},{"underscore":313,"web3-core-helpers":319,"web3-core-promievent":322,"web3-core-subscriptions":327,"web3-utils":364}],321:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
@@ -42473,7 +42472,7 @@ module.exports = {
     BatchManager: BatchManager
 };
 
-},{"./batch.js":323,"./givenProvider.js":324,"./jsonrpc.js":326,"underscore":313,"web3-core-helpers":319,"web3-providers-http":359,"web3-providers-ipc":360,"web3-providers-ws":364}],326:[function(require,module,exports){
+},{"./batch.js":323,"./givenProvider.js":324,"./jsonrpc.js":326,"underscore":313,"web3-core-helpers":319,"web3-providers-http":359,"web3-providers-ipc":360,"web3-providers-ws":361}],326:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -43020,7 +43019,7 @@ var extend = function (pckg) {
 module.exports = extend;
 
 
-},{"web3-core-helpers":319,"web3-core-method":320,"web3-utils":367}],330:[function(require,module,exports){
+},{"web3-core-helpers":319,"web3-core-method":320,"web3-utils":364}],330:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -43400,7 +43399,7 @@ module.exports = {
     toTwosComplement: utils.toTwosComplement
 };
 
-},{"./param":334,"bn.js":331,"underscore":313,"web3-utils":367}],333:[function(require,module,exports){
+},{"./param":334,"bn.js":331,"underscore":313,"web3-utils":364}],333:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -43808,7 +43807,7 @@ var coder = new ABICoder([
 
 module.exports = coder;
 
-},{"./formatters":332,"./types/address":336,"./types/bool":337,"./types/bytes":338,"./types/dynamicbytes":339,"./types/int":340,"./types/string":341,"./types/uint":342,"underscore":313,"web3-utils":367}],334:[function(require,module,exports){
+},{"./formatters":332,"./types/address":336,"./types/bool":337,"./types/bytes":338,"./types/dynamicbytes":339,"./types/int":340,"./types/string":341,"./types/uint":342,"underscore":313,"web3-utils":364}],334:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -45378,7 +45377,7 @@ if (typeof localStorage === 'undefined') {
 module.exports = Accounts;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"bluebird":343,"buffer":47,"crypto":56,"crypto-browserify":208,"eth-lib/lib/account":344,"eth-lib/lib/bytes":346,"eth-lib/lib/hash":347,"eth-lib/lib/nat":348,"eth-lib/lib/rlp":349,"scrypt.js":294,"underscore":313,"uuid":351,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-utils":367}],353:[function(require,module,exports){
+},{"bluebird":343,"buffer":47,"crypto":56,"crypto-browserify":208,"eth-lib/lib/account":344,"eth-lib/lib/bytes":346,"eth-lib/lib/hash":347,"eth-lib/lib/nat":348,"eth-lib/lib/rlp":349,"scrypt.js":294,"underscore":313,"uuid":351,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-utils":364}],353:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -46278,7 +46277,7 @@ Contract.prototype._executeMethod = function _executeMethod(){
 
 module.exports = Contract;
 
-},{"underscore":313,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-core-promievent":322,"web3-core-subscriptions":327,"web3-eth-abi":333,"web3-utils":367}],354:[function(require,module,exports){
+},{"underscore":313,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-core-promievent":322,"web3-core-subscriptions":327,"web3-eth-abi":333,"web3-utils":364}],354:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -46547,7 +46546,7 @@ Iban.prototype.toString = function () {
 
 module.exports = Iban;
 
-},{"bn.js":171,"web3-utils":367}],355:[function(require,module,exports){
+},{"bn.js":171,"web3-utils":364}],355:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -46693,7 +46692,7 @@ module.exports = Personal;
 
 
 
-},{"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-net":358,"web3-utils":367}],356:[function(require,module,exports){
+},{"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-net":358,"web3-utils":364}],356:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -47242,7 +47241,7 @@ core.addProviders(Eth);
 module.exports = Eth;
 
 
-},{"./getNetworkType.js":356,"underscore":313,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-core-subscriptions":327,"web3-eth-abi":333,"web3-eth-accounts":352,"web3-eth-contract":353,"web3-eth-iban":354,"web3-eth-personal":355,"web3-net":358,"web3-utils":367}],358:[function(require,module,exports){
+},{"./getNetworkType.js":356,"underscore":313,"web3-core":330,"web3-core-helpers":319,"web3-core-method":320,"web3-core-subscriptions":327,"web3-eth-abi":333,"web3-eth-accounts":352,"web3-eth-contract":353,"web3-eth-iban":354,"web3-eth-personal":355,"web3-net":358,"web3-utils":364}],358:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -47311,7 +47310,7 @@ module.exports = Net;
 
 
 
-},{"web3-core":330,"web3-core-method":320,"web3-utils":367}],359:[function(require,module,exports){
+},{"web3-core":330,"web3-core-method":320,"web3-utils":364}],359:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -47725,141 +47724,6 @@ module.exports = IpcProvider;
 
 
 },{"oboe":268,"underscore":313,"web3-core-helpers":319}],361:[function(require,module,exports){
-var _global = (function() { return this || {}; })();
-var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
-var websocket_version = require('./version');
-
-
-/**
- * Expose a W3C WebSocket class with just one or two arguments.
- */
-function W3CWebSocket(uri, protocols) {
-	var native_instance;
-
-	if (protocols) {
-		native_instance = new NativeWebSocket(uri, protocols);
-	}
-	else {
-		native_instance = new NativeWebSocket(uri);
-	}
-
-	/**
-	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
-	 * class). Since it is an Object it will be returned as it is when creating an
-	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
-	 *
-	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
-	 */
-	return native_instance;
-}
-
-
-/**
- * Module exports.
- */
-module.exports = {
-    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
-    'version'      : websocket_version
-};
-
-},{"./version":362}],362:[function(require,module,exports){
-module.exports = require('../package.json').version;
-
-},{"../package.json":363}],363:[function(require,module,exports){
-module.exports={
-  "_from": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
-  "_id": "websocket@1.0.24",
-  "_inBundle": false,
-  "_location": "/web3-providers-ws/websocket",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "git",
-    "raw": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
-    "name": "websocket",
-    "escapedName": "websocket",
-    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
-    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
-    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
-    "gitCommittish": "browserifyCompatible"
-  },
-  "_requiredBy": [
-    "/web3-providers-ws"
-  ],
-  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#7004c39c42ac98875ab61126e5b4a925430f592c",
-  "_spec": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
-  "_where": "/home/oskar/programming/metoo/node_modules/web3-providers-ws",
-  "author": {
-    "name": "Brian McKelvey",
-    "email": "brian@worlize.com",
-    "url": "https://www.worlize.com/"
-  },
-  "browser": "lib/browser.js",
-  "bugs": {
-    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
-  },
-  "bundleDependencies": false,
-  "config": {
-    "verbose": false
-  },
-  "contributors": [
-    {
-      "name": "Iñaki Baz Castillo",
-      "email": "ibc@aliax.net",
-      "url": "http://dev.sipdoc.net"
-    }
-  ],
-  "dependencies": {
-    "debug": "^2.2.0",
-    "nan": "^2.3.3",
-    "typedarray-to-buffer": "^3.1.2",
-    "yaeti": "^0.0.6"
-  },
-  "deprecated": false,
-  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
-  "devDependencies": {
-    "buffer-equal": "^1.0.0",
-    "faucet": "^0.0.1",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
-    "gulp-jshint": "^2.0.4",
-    "jshint": "^2.0.0",
-    "jshint-stylish": "^2.2.1",
-    "tape": "^4.0.1"
-  },
-  "directories": {
-    "lib": "./lib"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  },
-  "homepage": "https://github.com/theturtle32/WebSocket-Node",
-  "keywords": [
-    "websocket",
-    "websockets",
-    "socket",
-    "networking",
-    "comet",
-    "push",
-    "RFC-6455",
-    "realtime",
-    "server",
-    "client"
-  ],
-  "license": "Apache-2.0",
-  "main": "index",
-  "name": "websocket",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
-  },
-  "scripts": {
-    "gulp": "gulp",
-    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
-    "test": "faucet test/unit"
-  },
-  "version": "1.0.24"
-}
-
-},{}],364:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -48200,7 +48064,7 @@ WebsocketProvider.prototype.reset = function () {
 module.exports = WebsocketProvider;
 
 
-},{"underscore":313,"web3-core-helpers":319,"websocket":361}],365:[function(require,module,exports){
+},{"underscore":313,"web3-core-helpers":319,"websocket":369}],362:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -48385,9 +48249,9 @@ module.exports = Shh;
 
 
 
-},{"web3-core":330,"web3-core-method":320,"web3-core-subscriptions":327,"web3-net":358}],366:[function(require,module,exports){
+},{"web3-core":330,"web3-core-method":320,"web3-core-subscriptions":327,"web3-net":358}],363:[function(require,module,exports){
 arguments[4][239][0].apply(exports,arguments)
-},{"dup":239}],367:[function(require,module,exports){
+},{"dup":239}],364:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -48713,7 +48577,7 @@ module.exports = {
 };
 
 
-},{"./soliditySha3.js":368,"./utils.js":369,"ethjs-unit":238,"randomhex":291,"underscore":313}],368:[function(require,module,exports){
+},{"./soliditySha3.js":365,"./utils.js":366,"ethjs-unit":238,"randomhex":291,"underscore":313}],365:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -48960,7 +48824,7 @@ var soliditySha3 = function () {
 
 module.exports = soliditySha3;
 
-},{"./utils.js":369,"bn.js":366,"underscore":313}],369:[function(require,module,exports){
+},{"./utils.js":366,"bn.js":363,"underscore":313}],366:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -49425,7 +49289,7 @@ module.exports = {
     sha3: sha3
 };
 
-},{"bn.js":366,"eth-lib/lib/hash":237,"number-to-bn":267,"underscore":313,"utf8":315}],370:[function(require,module,exports){
+},{"bn.js":363,"eth-lib/lib/hash":237,"number-to-bn":267,"underscore":313,"utf8":315}],367:[function(require,module,exports){
 module.exports={
   "_from": "web3@^1.0.0-beta.29",
   "_id": "web3@1.0.0-beta.29",
@@ -49512,7 +49376,7 @@ module.exports={
   "version": "1.0.0-beta.29"
 }
 
-},{}],371:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -49593,7 +49457,142 @@ core.addProviders(Web3);
 module.exports = Web3;
 
 
-},{"../package.json":370,"web3-bzz":316,"web3-core":330,"web3-eth":357,"web3-eth-personal":355,"web3-net":358,"web3-shh":365,"web3-utils":367}],372:[function(require,module,exports){
+},{"../package.json":367,"web3-bzz":316,"web3-core":330,"web3-eth":357,"web3-eth-personal":355,"web3-net":358,"web3-shh":362,"web3-utils":364}],369:[function(require,module,exports){
+var _global = (function() { return this || {}; })();
+var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
+var websocket_version = require('./version');
+
+
+/**
+ * Expose a W3C WebSocket class with just one or two arguments.
+ */
+function W3CWebSocket(uri, protocols) {
+	var native_instance;
+
+	if (protocols) {
+		native_instance = new NativeWebSocket(uri, protocols);
+	}
+	else {
+		native_instance = new NativeWebSocket(uri);
+	}
+
+	/**
+	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
+	 * class). Since it is an Object it will be returned as it is when creating an
+	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
+	 *
+	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
+	 */
+	return native_instance;
+}
+
+
+/**
+ * Module exports.
+ */
+module.exports = {
+    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
+    'version'      : websocket_version
+};
+
+},{"./version":370}],370:[function(require,module,exports){
+module.exports = require('../package.json').version;
+
+},{"../package.json":371}],371:[function(require,module,exports){
+module.exports={
+  "_from": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_id": "websocket@1.0.24",
+  "_inBundle": false,
+  "_location": "/websocket",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "name": "websocket",
+    "escapedName": "websocket",
+    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
+    "gitCommittish": "browserifyCompatible"
+  },
+  "_requiredBy": [
+    "/web3-providers-ws"
+  ],
+  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#7004c39c42ac98875ab61126e5b4a925430f592c",
+  "_spec": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_where": "/home/oskar/programming/metoo/node_modules/web3-providers-ws",
+  "author": {
+    "name": "Brian McKelvey",
+    "email": "brian@worlize.com",
+    "url": "https://www.worlize.com/"
+  },
+  "browser": "lib/browser.js",
+  "bugs": {
+    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
+  },
+  "bundleDependencies": false,
+  "config": {
+    "verbose": false
+  },
+  "contributors": [
+    {
+      "name": "Iñaki Baz Castillo",
+      "email": "ibc@aliax.net",
+      "url": "http://dev.sipdoc.net"
+    }
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "nan": "^2.3.3",
+    "typedarray-to-buffer": "^3.1.2",
+    "yaeti": "^0.0.6"
+  },
+  "deprecated": false,
+  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
+  "devDependencies": {
+    "buffer-equal": "^1.0.0",
+    "faucet": "^0.0.1",
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp-jshint": "^2.0.4",
+    "jshint": "^2.0.0",
+    "jshint-stylish": "^2.2.1",
+    "tape": "^4.0.1"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "homepage": "https://github.com/theturtle32/WebSocket-Node",
+  "keywords": [
+    "websocket",
+    "websockets",
+    "socket",
+    "networking",
+    "comet",
+    "push",
+    "RFC-6455",
+    "realtime",
+    "server",
+    "client"
+  ],
+  "license": "Apache-2.0",
+  "main": "index",
+  "name": "websocket",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
+    "test": "faucet test/unit"
+  },
+  "version": "1.0.24"
+}
+
+},{}],372:[function(require,module,exports){
 var request = require('xhr-request')
 
 module.exports = function (url, options) {
