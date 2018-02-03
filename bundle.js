@@ -30242,13 +30242,13 @@ Identify.attest = function() {
 
 // Setup the simple Status contract - allows you to set and read a status string
 // uPort connect
-Identify.connect = function() {
+Identify.connect = async function() {
   
-  connect.requestCredentials({
+  let credentials = await connect.requestCredentials({
     requested: ['name', 'email', 'CoordLogin'],
     notifications: true // We want this if we want to recieve credentials
   })
-  .then((credentials) => {
+  
   // Do something
     console.log(credentials)
     console.log("Credenials:", credentials);
@@ -30263,9 +30263,7 @@ Identify.connect = function() {
       globalState.perEncryptionKeyPub = credentials.CoordLogin.PubKey;
     }
     render();
-    }, (err) => {
-        console.log("Error:", err);
-    })
+
     return web3
 }
 
@@ -30312,8 +30310,8 @@ function initContract(){
   contract = Promise.promisifyAll(contract)
 }
 
-window.connect = function() {
-  uweb3 = Identify.connect()
+window.connect = async function() {
+  uweb3 = await Identify.connect()
   initContract()
   showRegistrations()
 }
@@ -30340,7 +30338,7 @@ async function reveal(hash) {
 }
 
 function showRegistrations() {
-  console.log("0")
+  console.log("0", globalState.ethAddress)
   contract.getMyRegistrations(globalState.ethAddress, (error, registrations) => {
     console.log("1", registrations)
     registrations = [...new Set(registrations)]
@@ -30360,6 +30358,13 @@ function showRegistrations() {
       })
     })
   })
+}
+
+window.decrypt = async function() {
+  let reveal = await contract.getRevealAsync(globalState.ethAddress)
+  let json = JSON.parse(reveal)
+  let decrypted = enc.decrypt(json, globalState.perEncryptionKeyPriv)
+  document.getElementById("decrypted").innerHTML = decrypted
 }
 
 window.uportConnect = Identify.connect;
