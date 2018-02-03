@@ -47,21 +47,21 @@ ZkpUtils.verifyProof = function(evilName, address, s1String, s2String, publicKey
   let recovered1 = util.ecrecover(Buffer.from(h2.slice(2), 'hex'), s2.v, s2.r, s2.s)
 
   if (recovered1.toString('hex') === publicKey.slice(2)) {
-    console.log('stage 1 passed')
+    //console.log('stage 1 passed')
 
     let h1 = sha3(evilName + address)
     let s1 = str2sig(s1String)
     let recovered2 = util.ecrecover(Buffer.from(h1.slice(2), 'hex'), s1.v, s1.r, s1.s)
 
     if (recovered2.toString('hex') !== publicKey.slice(2)) {
-      console.log('stage 2 passed')
+      //console.log('stage 2 passed')
       return true
     } else {
-      console.log('stage 2 failed')
+      //console.log('stage 2 failed')
     }
 
-  } else {
-    console.log('stage 1 failed')
+  //} else {
+    //console.log('stage 1 failed')
   }
   return false
 }
