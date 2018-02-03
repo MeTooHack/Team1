@@ -6,6 +6,8 @@
     <script type="text/javascript" src="bundle.js"></script>
   </head>
   <body>
+    <span id="name"></span>
+    <span id="emailAddress"></span>
     <button onclick="connect()">Connect</button>
     <span id="address"></span>
     <div>
@@ -16,5 +18,39 @@
       </form>
     </div>
     <ul id="myRegistrations"></ul>
+    <script>
+        // State and render functions
+  
+        const $ = (selector) => document.querySelector(selector)
+        let globalState = {
+          uportId: "",
+          perEncryptionKeyPriv: "",
+          perEncryptionKeyPub: "",
+          ethAddress: "",
+          ethBalance: "",
+          currentStatus: "",
+          statusInput: "",
+          txHashSentEth: "",
+          txHashSetStatus: "",
+          sendToAddr: "",
+          sendToVal: ""
+        }
+  
+        const render = function () {
+          $('#name').innerHTML = globalState.uportName;
+          $('#emailAddress').innerHTML = globalState.uportEmail;
+        }
+  
+        const updateState = function () {
+          globalState.statusInput = $('#statusInput').value;
+          console.log(globalState)
+        }
+  
+        ////////////////////////////////////////////////
+  
+  
+        ////////////////////////////////////////////////
+  
+      </script>
   </body>
 </html>

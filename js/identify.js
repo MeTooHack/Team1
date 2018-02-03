@@ -1,11 +1,7 @@
-//import { Connect, MNID, SimpleSigner } from 'uport-connect'
-//export { Connect, ConnectCore, QRUtil, SimpleSigner, Credentials, MNID }
 const uport = require('uport-connect')
-
-/* global Web3 globalState render */
+const Enc = require('./enc.js')
 
 // Setup
-
 const SimpleSigner = uport.SimpleSigner
 const Connect = uport.Connect
 
@@ -19,15 +15,19 @@ const connect = new Connect("Coordination", {
   
 const web3 = connect.getWeb3()
 
+
 const credentials = connect.credentials
 
 let Identify = {}
 
 Identify.attest = function() {
+  var encryptionKeys = Enc.generateKeyPair();
+  globalState.perEncryptionKeyPriv = encryptionKeys.secretKey;
+  globalState.perEncryptionKeyPub = encryptionKeys.publicKey;
   credentials.attest({
     sub: globalState.uportId,
     exp: Date.now() + 100000000000,
-    claim: {CoordLogin: {PrivKey: 'Ox123', PubKey: '0x4321'}}
+    claim: {CoordLogin: {PrivKey: encryptionKeys.secretKey, PubKey: encryptionKeys.publicKey}}
   }).then(attestation => {
     console.log(attestation)
     //me.uport:add?attestations=
@@ -42,6 +42,7 @@ Identify.attest = function() {
 // Setup the simple Status contract - allows you to set and read a status string
 // uPort connect
 Identify.connect = function() {
+  
   connect.requestCredentials({
     requested: ['name', 'email', 'CoordLogin'],
     notifications: true // We want this if we want to recieve credentials
@@ -54,10 +55,17 @@ Identify.connect = function() {
     globalState.uportId = credentials.address;
     globalState.ethAddress = uport.MNID.decode(credentials.address).address;
     globalState.uportEmail = credentials.email;
+    if(!credentials.CoordLogin){
+      Identify.attest();
+    }else{
+      globalState.perEncryptionKeyPriv = credentials.CoordLogin.PrivKey;
+      globalState.perEncryptionKeyPub = credentials.CoordLogin.PubKey;
+    }
     render();
     }, (err) => {
         console.log("Error:", err);
     })
+    return web3
 }
 
 
